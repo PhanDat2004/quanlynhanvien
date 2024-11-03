@@ -93,7 +93,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="table__header">Số CCCD</th>
+                                    <th class="table__header">STT</th>
+                                    <th class="table__header">Mã nhân viên</th>
                                     <th class="table__header">Tên nhân viên</th>
                                     <th class="table__header">Số điện thoại</th>
                                     <th class="table__header">Email</th>
@@ -102,17 +103,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table__data">037204000818</td>
-                                    <td class="table__data">Phan Thành Đạt</td>
-                                    <td class="table__data">0961748135</td>
-                                    <td class="table__data">dat65531@gmail.com</td>
-                                    <td class="table__data">Nam Định</td>
-                                    <td class="table__data">
-                                        <a href="" class="table__action">Sửa</a>
-                                        <a href="" class="table__action">Xoá</a>
-                                    </td>
-                                </tr>
+
+                                <?php
+                                include 'connect.php';
+
+                                // Khởi tạo biến  ordinal number với giá trị ban đầu là 1
+                                $ordinalNumber = 1;
+
+                                // Câu lện sql để truy xuất dữ liệu
+                                $sql = "SELECT * FROM employee";
+
+                                // Thực thi câu lệnh sql
+                                $query = mysqli_query($conn, $sql);
+                                while ($row = mysqli_fetch_array($query)) {
+                                ?>
+                                    <tr>
+                                        <td class="table__data"> <?php echo $ordinalNumber ?> </td>
+                                        <td class="table__data"> <?php echo $row['employee_id'] ?> </td>
+                                        <td class="table__data"> <?php echo $row['name'] ?> </td>
+                                        <td class="table__data"> <?php echo $row['phone_number'] ?> </td>
+                                        <td class="table__data"> <?php echo $row['email'] ?> </td>
+                                        <td class="table__data"> <?php echo $row['hometown'] ?> </td>
+                                        <td class="table__data">
+                                            <a href="" class="table__action">Sửa</a>
+                                            <a href="" class="table__action">Xoá</a>
+                                        </td>
+                                    </tr>
+
+                                <?php
+                                    // Tăng giá trị của biến ordinalNumber sau mỗi vòng lặp
+                                    $ordinalNumber++;
+                                } ?>
+
                             </tbody>
                         </table>
                     </div>

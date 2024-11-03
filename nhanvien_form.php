@@ -1,3 +1,25 @@
+<?php
+include 'connect.php'; // Nhập code từ file connect.php
+
+// Kiểm tra form đã được submit
+if (isset($_POST['btn'])) {
+    // Lấy dữ liệu được nhập từ form 
+    $name = $_POST['name'];
+    $phoneNumber = $_POST['phone_number'];
+    $email = $_POST['email'];
+    $hometown = $_POST['hometown'];
+
+    // Câu lệnh sql để thêm dữ liệu vào database
+    $sql = "INSERT INTO `employee` (`name`, `phone_number`, `email`, `hometown`) VALUES ('$name', '$phoneNumber', '$email', '$hometown');";
+
+    // Thực hiện câu lệnh sql
+    mysqli_query($conn, $sql);
+
+    // Chuyển sang trang danh sách nhân viên khi thêm 1 nhân viên
+    header("location:nhanvien_list.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,10 +112,6 @@
                     <div class="main-content">
                         <form class="form" action="nhanvien_form.php" method="POST" enctype="multipart/form-data">
                             <div class="form__group">
-                                <label for="" class="form__label">Căn cước công dân</label>
-                                <input type="text" class="form__input" name="id" placeholder="Nhập CCCD">
-                            </div>
-                            <div class="form__group">
                                 <label for="" class="form__label">Họ tên</label>
                                 <input type="text" class="form__input" name="name" placeholder="Nhập họ tên nhân viên">
                             </div>
@@ -119,26 +137,3 @@
 </body>
 
 </html>
-
-<?php
-include 'connect.php'; // Nhập code từ file connect.php
-
-// Kiểm tra form đã được submit
-if (isset($_POST['btn'])) {
-    // Lấy dữ liệu được nhập từ form 
-    $name = $_POST['name'];
-    $id = $_POST['id'];
-    $phoneNumber = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $hometown = $_POST['hometown'];
-
-    // Câu lệnh sql để thêm dữ liệu vào database
-    $sql = "INSERT INTO `employee` (`id`, `name`, `phone_number`, `email`, `hometown`) VALUES ('$id', '$name', '$phoneNumber', '$email', '$hometown');";
-
-    // Thực hiện câu lệnh sql
-    mysqli_query($conn, $sql);
-
-    // Chuyển sang trang danh sách nhân viên khi thêm 1 nhân viên
-    header("location:nhanvien_list.php");
-}
-?>
