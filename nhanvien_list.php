@@ -126,7 +126,7 @@
                                         <td class="table__data"> <?php echo $row['hometown'] ?> </td>
                                         <td class="table__data">
                                             <a href="" class="table__action">Sửa</a>
-                                            <a href="" class="table__action">Xoá</a>
+                                            <a href="delete.php?this_id=<?php echo $row['employee_id'] ?>" class="table__action">Xoá</a>
                                         </td>
                                     </tr>
 
