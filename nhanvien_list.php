@@ -51,13 +51,13 @@
                             </a>
                             <ul class="subnav">
                                 <li class="subnav-item">
-                                    <a href="./nhanvien_form.php" class="subnav-link">
+                                    <a href="nhanvien_form.php" class="subnav-link">
                                         <i class="fa-solid fa-circle subnav__icon"></i>
                                         Thêm nhân viên
                                     </a>
                                 </li>
                                 <li class="subnav-item">
-                                    <a href="./nhanvien_list.php" class="subnav-link">
+                                    <a href="nhanvien_list.php" class="subnav-link">
                                         <i class="fa-solid fa-circle subnav__icon"></i>
                                         Danh sách nhân viên
                                     </a>
@@ -84,33 +84,37 @@
 
             <div class="grid__col-10">
                 <div class="container">
-                    <header class="header">
-                        <h2 class="heading">Thêm nhân viên</h2>
+                    <header class="header header__list">
+                        <h2 class="heading">Nhân viên</h2>
+                        <a href="./nhanvien_form.php" class="btn control__btn">Thêm nhân viên</a>
                     </header>
+
                     <div class="main-content">
-                        <form class="form" action="nhanvien_form.php" method="POST" enctype="multipart/form-data">
-                            <div class="form__group">
-                                <label for="" class="form__label">Căn cước công dân</label>
-                                <input type="text" class="form__input" name="id" placeholder="Nhập CCCD">
-                            </div>
-                            <div class="form__group">
-                                <label for="" class="form__label">Họ tên</label>
-                                <input type="text" class="form__input" name="name" placeholder="Nhập họ tên nhân viên">
-                            </div>
-                            <div class="form__group">
-                                <label for="" class="form__label">Số điện thoại</label>
-                                <input type="tel" class="form__input" name="phone_number" placeholder="Nhập số điện thoại">
-                            </div>
-                            <div class="form__group">
-                                <label for="" class="form__label">Email</label>
-                                <input type="email" class="form__input" name="email" placeholder="Nhập email">
-                            </div>
-                            <div class="form__group">
-                                <label for="" class="form__label">Quê quán</label>
-                                <input type="text" class="form__input" name="hometown" placeholder="Nhập nơi sinh">
-                            </div>
-                            <button class="btn" name="btn" type="submit">Thêm nhân viên</button>
-                        </form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="table__header">Số CCCD</th>
+                                    <th class="table__header">Tên nhân viên</th>
+                                    <th class="table__header">Số điện thoại</th>
+                                    <th class="table__header">Email</th>
+                                    <th class="table__header">Quê quán</th>
+                                    <th class="table__header">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="table__data">037204000818</td>
+                                    <td class="table__data">Phan Thành Đạt</td>
+                                    <td class="table__data">0961748135</td>
+                                    <td class="table__data">dat65531@gmail.com</td>
+                                    <td class="table__data">Nam Định</td>
+                                    <td class="table__data">
+                                        <a href="" class="table__action">Sửa</a>
+                                        <a href="" class="table__action">Xoá</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -119,26 +123,3 @@
 </body>
 
 </html>
-
-<?php
-include 'connect.php'; // Nhập code từ file connect.php
-
-// Kiểm tra form đã được submit
-if (isset($_POST['btn'])) {
-    // Lấy dữ liệu được nhập từ form 
-    $name = $_POST['name'];
-    $id = $_POST['id'];
-    $phoneNumber = $_POST['phone_number'];
-    $email = $_POST['email'];
-    $hometown = $_POST['hometown'];
-
-    // Câu lệnh sql để thêm dữ liệu vào database
-    $sql = "INSERT INTO `employee` (`id`, `name`, `phone_number`, `email`, `hometown`) VALUES ('$id', '$name', '$phoneNumber', '$email', '$hometown');";
-
-    // Thực hiện câu lệnh sql
-    mysqli_query($conn, $sql);
-
-    // Chuyển sang trang danh sách nhân viên khi thêm 1 nhân viên
-    header("location:nhanvien_list.php");
-}
-?>
