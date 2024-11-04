@@ -11,6 +11,25 @@ $query = mysqli_query($conn, $getEmployeeSql);
 
 // Kiểm tra xem có dữ liệu không trước khi lấy
 $employee = mysqli_fetch_assoc($query);
+
+
+// Xử lý sửa thông tin nhân viên khi nhấn nút
+if (isset($_POST['btn'])) {
+    // Lấy thông tin được nhập từ input
+    $name = $_POST['name'];
+    $phoneNumber = $_POST['phone_number'];
+    $email = $_POST['email'];
+    $hometown = $_POST['hometown'];
+
+    // Câu lệnh sql thực hiện việc cập nhật thông tin nhân viên trong bảng employee
+    $updateEmployeeSql = "UPDATE `employee` SET `name` = '$name', `phone_number` = '$phoneNumber',
+     `email` = '$email', `hometown` = '$hometown'  WHERE `employee`.`employee_id` = '$employeeID'";
+
+    // Thực thi câu lệnh SQL cập nhật thông tin trong bảng empolyee 
+    mysqli_query($conn, $updateEmployeeSql);
+
+    header('location:nhanvien_list.php'); // Quay lại trang nhanvien_list.php
+}
 ?>
 
 <div class="grid__col-10">
@@ -20,7 +39,7 @@ $employee = mysqli_fetch_assoc($query);
         </header>
         <div class="main-content">
             <!-- Hiển thị thông tin nhân viên -->
-            <form class="form" action="nhanvien_edit.php" method="POST" enctype="multipart/form-data">
+            <form class="form" action="nhanvien_edit.php?this_id=<?php echo $employeeID; ?>" method="POST" enctype="multipart/form-data">
                 <div class="form__group">
                     <label for="" class="form__label">Họ tên</label>
                     <input type="text" class="form__input" name="name" value="<?php echo $employee['name']; ?>">
