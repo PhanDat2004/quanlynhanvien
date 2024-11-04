@@ -41,7 +41,7 @@ if (isset($_POST['btn'])) {
                     <label for="" class="form__label">Quê quán</label>
                     <input type="text" class="form__input" name="hometown" placeholder="Nhập nơi sinh">
                 </div>
-                <button class="btn" name="btn" type="submit">Thêm nhân viên</button>
+                <button class="btn" name="btn" type="submit">Thêm</button>
             </form>
         </div>
     </div>
